@@ -1,7 +1,197 @@
-# Untitled notebook
-
-## Section
+# Welcome to ElixirLand
 
 ```elixir
+Mix.install([
+  {:httpoison, "~> 2.0"}
+])
+```
 
+## Pattern Matching
+
+Hey, we will start our journey with a probably well known mechanism: Pattern Matching!
+Lets see this in action:
+
+```elixir
+one = 1
+IO.puts("normal match/(assignment): #{one}")
+[one] = [1]
+IO.puts("pattern match on array element: #{one}")
+```
+
+Cool, so it looks like we can match the structure of the value on the right with variables names on the left. Lets try this! Free the Rabbit
+
+```elixir
+trapped_rabbit = ["|", "rabbit", "|"]
+# free_rabbit = ?
+```
+
+This cannot only be done to lists, we can also match much harder datastructures like big maps or tuples:
+
+```elixir
+# here we match a Result out of our database, where we get back a map. 
+# The Result can be as long as you want it to be but at the end, you just grab the piece you want.
+%{data: data} = %{
+  timstamp: ~T[20:06:15.124277],
+  table: :ikea_data,
+  data: %{pin: 2092, bankaccount: "Levin Gschwendter"}
+}
+
+# and now with a username and his birthday
+# {name, age} = {}
+```
+
+Now everyone does 2 of his own. Select two different data structures to match against ( see here for data structures: https://elixir-lang.org/getting-started/basic-types.html )
+
+```elixir
+# Playground
+```
+
+## Pipelines
+
+Now we know how to get to our data. Lets see how to manipulate it! For manipulation, we need different functions which come mainly from two modules. Here are the most used modules used for working with lists, tuples or maps: 1. https://hexdocs.pm/elixir/1.12/Enum.html and 2. https://hexdocs.pm/elixir/1.12/List.html.
+
+Upfront, there might be some weird syntax (|>). This simply defines the pipeline. What i mean by that is that when you want a String to be split(String.split/2), you could either write:
+
+1. String.split(string, ":")
+2. string |> String.split(":")
+
+When you hover over the functions which i used below, you can see how they are used.
+So lets see some examples next:
+
+```elixir
+"walt:42 peter:12 jen:99 bruce:32"
+|> String.split()
+# the long form of a inline function => fn x -> do(x) end
+|> Enum.map(fn x -> String.split(x, ":") end)
+# short form for a inline function  => &do(&1)
+|> Enum.map(&%{name: List.first(&1), age: List.last(&1) |> String.to_integer()})
+```
+
+Take the example above as reference for the upcoming excersise. To really get a feel for the functions and what to do with them, you will have 10 minutes time so you can play around with some of the data below. If you are finished playing, just put your name in the array below but remember, this is not a race ;-)
+
+```elixir
+finished = []
+
+uuids =
+  [
+    "dfb7b552-7037-11ee-bd63-325096b39f47",
+    "dfb7b818-7037-11ee-9949-325096b39f47",
+    "dfb7b8b8-7037-11ee-b50a-325096b39f47",
+    "dfb7b930-7037-11ee-b7d9-325096b39f47",
+    "dfb7b99e-7037-11ee-9ed1-325096b39f47",
+    "dfb7ba16-7037-11ee-b913-325096b39f47",
+    "dfb7ba84-7037-11ee-a1a9-325096b39f47",
+    "dfb7baf2-7037-11ee-b2bf-325096b39f47"
+  ]
+
+beers =
+  [
+    ["Sagres", 1.75],
+    ["SuperBock", 2.00],
+    ["Budweiser", 1.58],
+    ["Indian Pale Ale", 2.50],
+    ["Brew Dog", 2.25],
+    ["Algarve Rock", 2.75]
+  ]
+
+babynames =
+  [
+    %{index: 1, male: "Liam", female: "Olivia"},
+    %{index: 2, male: "Noah", female: "Emma"},
+    %{index: 3, male: "Oliver", female: "Charlotte"},
+    %{index: 4, male: "James", female: "Amelia"},
+    %{index: 5, male: "Elijah", female: "Sophia"},
+    %{index: 6, male: "William", female: "Isabella"},
+    %{index: 7, male: "Henry", female: "Ava"},
+    %{index: 8, male: "Lucas", female: "Mia"},
+    %{index: 9, male: "Benjamin", female: "Evelyn"},
+    %{index: 10, male: "Theodore", female: "Luna"}
+  ]
+
+persons =
+  [
+    {"Jester", 42, "Loule"},
+    {"Jeniffer", 23, "Faro"},
+    {"Justine", 24, "Portimao"},
+    {"Briget", 77, "Faro"},
+    {"Bruce", 54, "Portimao"},
+    {"Benjamin", 33, "Loule"},
+    {"Jen", 60, "Faro"}
+  ]
+```
+
+## Games
+
+Welcome to the Games section. Here we train what we have learned so far. Let's see what games we have today:
+
+## Game 1
+
+After fixing the scoreboard issue, you need a break and got in your garden to get some rest. Of course you are in Portugal so you have some olive trees in the backyard. They need to be processed so you start to collect them to make olive oil out of them. But some are in a bad condition so you dont want to further process these. How many bootles of oil could you make if one bottle takes 25 olives?
+
+```elixir
+olive_trees = [
+  %{
+    tree: [
+      {3, :good},
+      {1, :bad},
+      {4, :good},
+      {2, :good},
+      {5, :bad},
+      {8, :good},
+      {1, :bad},
+      {8, :bad}
+    ]
+  },
+  %{
+    tree: [
+      {2, :bad},
+      {5, :bad},
+      {3, :good},
+      {7, :bad},
+      {9, :good},
+      {6, :good},
+      {4, :bad},
+      {7, :good}
+    ]
+  },
+  %{
+    tree: [
+      {6, :bad},
+      {5, :good},
+      {8, :bad},
+      {2, :good},
+      {3, :bad},
+      {4, :good},
+      {1, :good},
+      {2, :bad}
+    ]
+  }
+]
+```
+
+## Game 2
+
+We are the lead developer in a firm which produces cool games. You got a new task from your scrum master today that the score tables are broken. This is the data you have to tackle:
+
+```elixir
+#user_data = 
+  [
+    {:round1
+      {playername: "Tammy Hinton", points: 21}
+      ,{playername: "Melanie Gill", points: 32}
+      ,{playername: "Melanie Gill", points: 32}
+    } 
+  {:round2}
+  ]
+```
+
+## Extra Sections
+
+Hey, here you'll learn about changesets. A changeset can be used in forms on your website to validate that the input data holds the structure/attributes you want it to have.
+
+Lets see an example:
+
+```elixir
+defmodule FormData do
+end
 ```
