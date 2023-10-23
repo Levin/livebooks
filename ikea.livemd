@@ -2,7 +2,8 @@
 
 ```elixir
 Mix.install([
-  {:httpoison, "~> 2.0"}
+  {:httpoison, "~> 2.0"},
+  {:kino_maplibre, "~> 0.1.10"}
 ])
 ```
 
@@ -120,6 +121,48 @@ persons =
   ]
 ```
 
+## Modules
+
+In Elixir we do not have classes and so on no methods corresponding to them. But we have Modules which can take care of your functions. So lets see how we define one and how to use them.
+
+```elixir
+defmodule MyModule do
+  def add_2(num), do: 2 + num
+
+  def add_3(num) do
+    3 + num
+  end
+end
+```
+
+here we created a module named MyModule. It holds two functions, which are add_2 and add_3. The add_2 function is a shorthand version of the add_3 function. if your function only consists of one statement, you can use the short version.
+
+## Functions
+
+Lets take a closer look at functions here because they are the what you will be working with. Functions can only be defined inside a module. So lets create another one
+
+```elixir
+# write a module and add one private and two public functions. 
+```
+
+There is a method of writing functions which is called Multi-Clausing. This can loosely converted to function overriding in other languages but ill demonstrate it and then you can have a try.
+
+```elixir
+defmodule Greeting do
+  def greet(:professor_williams), do: "Hello, Professor Williams"
+
+  def greet(:mom), do: "Hi, Mom!"
+
+  def greet(:best_friend), do: "Yo! Wassup?!?!"
+end
+```
+
+test these functions below ->
+
+```elixir
+
+```
+
 ## Games
 
 Welcome to the Games section. Here we train what we have learned so far. Let's see what games we have today:
@@ -174,24 +217,25 @@ olive_trees = [
 We are the lead developer in a firm which produces cool games. You got a new task from your scrum master today that the score tables are broken. This is the data you have to tackle:
 
 ```elixir
-#user_data = 
-  [
-    {:round1
-      {playername: "Tammy Hinton", points: 21}
-      ,{playername: "Melanie Gill", points: 32}
-      ,{playername: "Melanie Gill", points: 32}
-    } 
-  {:round2}
-  ]
+round1 =
+  {[
+     %{playername: "Tammy Hinton", points: 21},
+     %{playername: "NightWolf", points: 32},
+     %{playername: "Melanie Gill", points: 32}
+   ],
+   [
+     %{playername: "Melanie Gill", points: 25},
+     %{playername: "Tammy Hinton", points: 20},
+     %{playername: "NightWolf", points: 15}
+   ],
+   [
+     %{playername: "Melanie Gill", points: 25},
+     %{playername: "NightWolf", points: 15},
+     %{playername: "Tammy Hinton", points: 20}
+   ]}
 ```
 
-## Extra Sections
+You need to display the winner for:
 
-Hey, here you'll learn about changesets. A changeset can be used in forms on your website to validate that the input data holds the structure/attributes you want it to have.
-
-Lets see an example:
-
-```elixir
-defmodule FormData do
-end
-```
+1. each round
+2. the whole game
