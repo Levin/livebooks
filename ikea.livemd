@@ -3,7 +3,8 @@
 ```elixir
 Mix.install([
   {:httpoison, "~> 2.0"},
-  {:kino_maplibre, "~> 0.1.10"}
+  {:kino_maplibre, "~> 0.1.10"},
+  {:kino_vega_lite, "~> 0.1.10"}
 ])
 ```
 
@@ -145,7 +146,7 @@ Lets take a closer look at functions here because they are the what you will be 
 # write a module and add one private and two public functions. 
 ```
 
-There is a method of writing functions which is called Multi-Clausing. This can loosely converted to function overriding in other languages but ill demonstrate it and then you can have a try.
+There is a method of writing functions which is called Multi-Clausing. This can loosely be translated to function overriding in other languages but ill demonstrate it and then you can have a try.
 
 ```elixir
 defmodule Greeting do
@@ -219,19 +220,19 @@ We are the lead developer in a firm which produces cool games. You got a new tas
 ```elixir
 round1 =
   {[
-     %{playername: "Tammy Hinton", points: 21},
-     %{playername: "NightWolf", points: 32},
-     %{playername: "Melanie Gill", points: 32}
+     %{playername: "Tammy Hinton", points: 10},
+     %{playername: "NightWolf", points: 12},
+     %{playername: "Melanie Gill", points: 5}
    ],
    [
-     %{playername: "Melanie Gill", points: 25},
-     %{playername: "Tammy Hinton", points: 20},
-     %{playername: "NightWolf", points: 15}
+     %{playername: "Melanie Gill", points: 6},
+     %{playername: "Tammy Hinton", points: 3},
+     %{playername: "NightWolf", points: 8}
    ],
    [
-     %{playername: "Melanie Gill", points: 25},
-     %{playername: "NightWolf", points: 15},
-     %{playername: "Tammy Hinton", points: 20}
+     %{playername: "Melanie Gill", points: 7},
+     %{playername: "NightWolf", points: 5},
+     %{playername: "Tammy Hinton", points: 3}
    ]}
 ```
 
@@ -239,3 +240,37 @@ You need to display the winner for:
 
 1. each round
 2. the whole game
+
+## Game 3
+
+This one is the longest one. Lets go!
+
+You are lead developer at a big social media company. The new boss introduced a new feature for the users: A blue check! They can pay for it, but who keeps track of the paying customers. Only them should receive the new blue check. You will have to deal with two kinds of lists. The one is from your customer database which holds the current state without any regards to payments. The second list is from your stripe gateway which lists you all the new payments made.
+
+You want to merge these two lists so that you can see in one list who paid.
+
+```elixir
+userlist =
+  [
+    %{uuid: "d4d0d-a64s3", username: "paul", likes: 111, posts: 25},
+    %{uuid: "colbd-judw3", username: "jenn", likes: 10_000, posts: 5},
+    %{uuid: "vjd0d-hk9q3", username: "christiano", likes: 10_000_000_000, posts: 1},
+    %{uuid: "bur0d-f7dr3", username: "wosible", likes: 32, posts: 9},
+    %{uuid: "jili9-d2dz3", username: "vinery xyz", likes: 54, posts: 7},
+    %{uuid: "k4l09-799op", username: "burinda", likes: 43, posts: 58},
+    %{uuid: "kuz57-6670b", username: "wieldo", likes: 87, posts: 4},
+    %{uuid: "o47df-a6ds3", username: "brucinator", likes: 63, posts: 3},
+    %{uuid: "q40ww-i0tu6", username: "cortina", likes: 798_765, posts: 55},
+    %{uuid: "wee3r-ansvt", username: "emeralda", likes: 123_443_034, posts: 50}
+  ]
+
+payment_list = ["bur0d-f7dr3", "q40ww-i0tu6", "wee3r-ansvt", "d4d0d-a64s3"]
+```
+
+How much profit do we now make?
+
+You can also model the data with the use of smart cells! have a look. Take some data from before and model some cells on your own. But be aware that you may have to alter some datasets (with pipelines and the Enum module for example) to get the desired datamodel which a smart cell needs (see maps (https://hexdocs.pm/elixir/1.12.3/Map.html))
+
+```elixir
+# playground
+```
