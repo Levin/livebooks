@@ -5,7 +5,5 @@ when you come to a conclusion. come together in the deployed project and finaliz
 
 For the local livebook, use this install. We will discuss it :)
 Mix.install([
-  {:httpoison, "~> 2.0"},
-  {:kino_maplibre, "~> 0.1.10"},
   {:kino_vega_lite, "~> 0.1.10"}
 ])
